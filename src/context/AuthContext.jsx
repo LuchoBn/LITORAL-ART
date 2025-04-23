@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+/*import { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../firebase/config'; // (backend)
 
 const AuthContext = createContext();
@@ -46,6 +46,58 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}
+    </AuthContext.Provider>
+  );
+}*/
+
+
+import { createContext, useContext, useState } from 'react';
+
+const AuthContext = createContext();
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
+
+export function AuthProvider({ children }) {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  // Simula login
+  const login = (email, password) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setCurrentUser({ email, displayName: email.split('@')[0] });
+        resolve();
+      }, 1000); // Simula delay de rede
+    });
+  };
+
+  // Simula registro
+  const register = (email, password) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setCurrentUser({ email, displayName: email.split('@')[0] });
+        resolve();
+      }, 1000);
+    });
+  };
+
+  // Simula logout
+  const logout = () => {
+    setCurrentUser(null);
+    return Promise.resolve();
+  };
+
+  const value = {
+    currentUser,
+    login,
+    register,
+    logout
+  };
+
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
     </AuthContext.Provider>
   );
 }
