@@ -1,4 +1,4 @@
-/*import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../firebase/config'; // (backend)
 
 const AuthContext = createContext();
@@ -48,8 +48,8 @@ export function AuthProvider({ children }) {
       {!loading && children}
     </AuthContext.Provider>
   );
-}*/
-
+}
+/*
 
 import { createContext, useContext, useState } from 'react';
 
@@ -100,4 +100,4 @@ export function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
-}
+}*/

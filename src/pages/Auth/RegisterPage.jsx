@@ -11,7 +11,7 @@ import {
   FormHelperText
 } from '@mui/material';
 import AuthLayout from '../../components/Layout/AuthLayout';
-
+const navigate = useNavigate();
 const onSubmit = async (values) => {
     try {
       console.log(values);
@@ -44,7 +44,9 @@ const userTypes = [
 
 export default function RegisterPage() {
   const navigate = useNavigate();
-
+  const onSubmit = async (data) => {
+    navigate('/dashboard');
+  };
   const formik = useFormik({
     initialValues: {
       email: '',

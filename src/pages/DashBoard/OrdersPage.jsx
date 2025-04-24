@@ -1,6 +1,6 @@
-import { DataGrid } from '@mui/x-data-grid';
-import { Box, Typography, Chip } from '@mui/material';
 
+import { DataGrid } from '@mui/x-data-grid';  // Fixed package name
+import { Box, Typography, Chip } from '@mui/material';  // Fixed package name
 const columns = [
   { field: 'id', headerName: 'Orden', width: 100 },
   { field: 'date', headerName: 'Fecha', width: 150 },
