@@ -1,26 +1,11 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './context/AuthContext';
-import Navbar from './components/Layout/Navbar';
-import Footer from './components/Layout/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import PrivateRoute from './components/Auth/PrivateRoute';
 import HomePage from './pages/Public/HomePage';
 import LoginPage from './pages/Auth/LoginPage';
 import RegisterPage from './pages/Auth/RegisterPage';
-import ForgotPasswordPage from './pages/Auth/ForgotPasswordPage';
-
-
-// Componentes do Dashboard (protegidos)
-import MainDashboard from './pages/Dashboard/MainDashboard';
-import ProfilePage from './pages/Dashboard/ProfilePage';
-import ProductsPage from './pages/Dashboard/ProductsPage';
-import OrdersPage from './pages/Dashboard/OrdersPage';
-import CustomersPage from './pages/Dashboard/CustomersPage';
-import SettingsPage from './pages/Dashboard/SettingsPage';
-
-// Componente de Rota Privada
-const PrivateRoute = ({ children }) => {
-  const { currentUser } = useAuth(); // Supondo que useAuth está disponível no AuthProvider
-  return currentUser ? children : <Navigate to="/login" />;
-};
+import DashboardPage from './pages/Dashboard/DashboardPage';
+import Navbar from './components/Layout/Navbar';
 
 function App() {
   return (
@@ -28,50 +13,16 @@ function App() {
       <AuthProvider>
         <Navbar />
         <Routes>
-          {/* Rotas Públicas */}
+          {/* Rutas públicas */}
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/registro" element={<RegisterPage />} />
-          <Route path="/recuperar-senha" element={<ForgotPasswordPage />} />
+          <Route path="/register" element={<RegisterPage />} />
 
-          {/* Rotas Protegidas do Dashboard */}
-          <Route path="/dashboard" element={
-            <PrivateRoute>
-              <MainDashboard />
-            </PrivateRoute>
-          } />
-          
-          <Route path="/dashboard/perfil" element={
-            <PrivateRoute>
-              <ProfilePage />
-            </PrivateRoute>
-          } />
-          
-          <Route path="/dashboard/produtos" element={
-            <PrivateRoute>
-              <ProductsPage />
-            </PrivateRoute>
-          } />
-          
-          <Route path="/dashboard/pedidos" element={
-            <PrivateRoute>
-              <OrdersPage />
-            </PrivateRoute>
-          } />
-          
-          <Route path="/dashboard/clientes" element={
-            <PrivateRoute>
-              <CustomersPage />
-            </PrivateRoute>
-          } />
-          
-          <Route path="/dashboard/configuracoes" element={
-            <PrivateRoute>
-              <SettingsPage />
-            </PrivateRoute>
-          } />
+          {/* Rutas protegidas */}
+          <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<DashboardPage />} />
+          </Route>
         </Routes>
-        <Footer />
       </AuthProvider>
     </Router>
   );
