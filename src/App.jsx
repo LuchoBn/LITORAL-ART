@@ -1,31 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import PrivateRoute from './components/Auth/PrivateRoute';
-import HomePage from './pages/Public/HomePage';
-import LoginPage from './pages/Auth/LoginPage';
-import RegisterPage from './pages/Auth/RegisterPage';
-import DashboardPage from './pages/Dashboard/DashboardPage';
-import Navbar from './components/Layout/Navbar';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "@/pages/Home/HomePage";
 
-function App() {
+export default function App() {
   return (
     <Router>
-      <AuthProvider>
-        <Navbar />
-        <Routes>
-          {/* Rutas públicas */}
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+      <Routes>
+        {/* Ruta principal */}
+        <Route path="/" element={<HomePage />} />
 
-          {/* Rutas protegidas */}
-          <Route element={<PrivateRoute />}>
-            <Route path="/dashboard" element={<DashboardPage />} />
-          </Route>
-        </Routes>
-      </AuthProvider>
+        {/* Aquí después agregás otras páginas como /login, /ferinhas, etc */}
+      </Routes>
     </Router>
   );
 }
-
-export default App;
